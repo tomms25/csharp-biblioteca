@@ -225,3 +225,110 @@ while (!researchResult)
 ResearchPrenotation();
 
 
+void GetPrenotazione(Documento documento, Utente utente)
+{
+    Console.WriteLine("Vuoi prenotarlo? (s/N)");
+    string prenotazioneOno = Console.ReadLine();
+
+    if (prenotazioneOno == "s")
+    {
+        Console.WriteLine("Per procedere con la prenotazione inserire data di inizio della prenotazione:");
+        bool primaData = false;
+        DateOnly dataInizio = DateOnly.Parse("1, 1, 1");
+
+        while (!primaData)
+        {
+            var dataInizioInserita = Console.ReadLine() ?? "";
+            DateOnly data;
+
+            if (DateOnly.TryParse(dataInizioInserita, out data))
+            {
+                dataInizio = DateOnly.Parse(dataInizioInserita);
+                primaData = true;
+            }
+            else { Console.WriteLine("Data non valida per favore riprovare:"); }
+        }
+
+        Console.WriteLine("Per procedere con la prenotazione inserire data di fine della prenotazione:");
+        bool secondaData = false;
+        DateOnly dataFine = DateOnly.Parse("1, 1, 1");
+
+        while (!secondaData)
+        {
+            var dataFineInserita = Console.ReadLine() ?? "";
+            DateOnly data;
+
+            if (DateOnly.TryParse(dataFineInserita, out data))
+            {
+                dataFine = DateOnly.Parse(dataFineInserita);
+                secondaData = true;
+            }
+            else { Console.WriteLine("Data non valida per favore riprovare:"); }
+        }
+
+        var prenotazioneAttuale = new Prenotazione(startDate: dataInizio, finishDate: dataFine);
+
+        utente.Prenotazione = prenotazioneAttuale;
+        documento.Prenotazione = prenotazioneAttuale;
+
+        prenotazioni.Add(prenotazioneAttuale);
+
+        Console.WriteLine();
+        StampaPrenotazione(prenotazioneAttuale, utente, documento);
+    }
+}
+
+void StampaPrenotazione(Prenotazione prenotazione, Utente utente, Documento documento)
+{
+    var nl = Environment.NewLine;
+    Console.WriteLine($"Prenotazione effettuata da: {utente.Nome} {utente.Cognome}" + nl
+        + $"Oggetto prenotato: {documento.Titolo}" + nl
+        + $"Data di inizio prenotazione: {prenotazione.DataInizio}" + nl
+        + $"Data di fine prenotazione: {prenotazione.DataFine}");
+}
+
+void ResearchPrenotation()
+{
+    Console.WriteLine();
+    Console.WriteLine("Ora puoi cercare le prenotazioni inserendo nome e cognome di un utente.");
+    Console.WriteLine();
+
+    var researchResultPrenotazione = false;
+
+    while (!researchResultPrenotazione)
+    {
+        Console.WriteLine("Inserisci il nome di un utente:");
+        var insertedName = Console.ReadLine();
+        Console.WriteLine("Inserisci il cognome dell'utente:");
+        var insertedSurname = Console.ReadLine();
+        var utenteTrovato = false;
+
+        foreach (Utente utente in utenti)
+        {
+            if (insertedName == utente.Nome & insertedSurname == utente.Cognome)
+            {
+                Prenotazione prenotazioneRicercata = utente.Prenotazione;
+
+                foreach (Documento documento in documenti)
+                {
+                    if (prenotazioneRicercata == documento.Prenotazione)
+                    {
+                        Console.WriteLine();
+                        StampaPrenotazione(prenotazioneRicercata, utente, documento);
+                        utenteTrovato = true;
+                    }
+                }
+            }
+        }
+        if (utenteTrovato)
+        {
+            researchResultPrenotazione = true;
+        }
+        else
+        {
+            Console.WriteLine("Nessun utente trovato. Riprova:");
+            Console.WriteLine();
+        }
+    }
+
+}

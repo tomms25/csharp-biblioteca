@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{5970ADFA-A6BC-49BC-9C1E-CC51E95253A0}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ch/Documento.cs">
+    <Files>
+      <File FileName="ch/Program.cs" Line="228" Column="1" />
+      <File FileName="ch/Utenti.cs" Line="7" Column="1" />
+      <File FileName="ch/Prenotazione.cs" Line="1" Column="1" />
+      <File FileName="ch/Documento.cs" Line="6" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ch" expanded="True">
+            <Node name="ch" expanded="True">
+              <Node name="Documento.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.ch PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
